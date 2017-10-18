@@ -1,0 +1,18 @@
+= space 30
+= img("https://bucket.mlcdn.com/a/725/725173/images/a3aa55ed78f659375488ce8eb06fb998a2eb4c05.png", "dotted line", "large-screen dotted-line")
+= space 10
+%small
+  %em
+    Describe your company here
+    %a{:href => "#"} «Company name»
+    %br/
+    Author —
+    %a{:href => "https://en.wikipedia.org/wiki/William_Shakespeare"} William Shakespeare
+    %br/
+
+    = locals[:comment]
+
+    %br/
+    %br/
+    A message has been sent to {$email} | &nbsp;
+    %a{:href=>"{$unsubscribe}"}Unsubscribe
