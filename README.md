@@ -3,14 +3,14 @@ Easy HTML emails
 
 This project uses [Foundation for Emails framework](http://foundation.zurb.com/emails).
 And it allows you to create templates using HAML and Markdown and get as a result:
-- "mail" version page (HTML version ready to emailing)
+- "mail" version page (HTML version ready to be emailed)
 - "web" version page
 
-Here is an example how HTML version (ready to emailing) should look like:
+Here is an example how HTML version (ready to be emailed) should look like:
 
-![ready_to_emailing.png](./src/assets/img/ready_to_emailing.png "ready_to_emailing.png")
+![ready to be emailed](src/assets/img/ready_to_be_emailed.png "ready to be emailed")
 
-Using "Easy HTML emails" you can just write something like that:
+Using "Easy HTML emails" you can just write something like this:
 
 ![your code](./src/assets/img/your_code.png "your code")
 
@@ -45,8 +45,8 @@ Usage
 
 Simple **sequence** looks like that
 1. you create *HAML template*
-2. from each *HAML template* we get one *HTML "mail" template* and one *HTML "web" template* 
-3. from *HTML "mail" template* and *HTML "web" template* we get *ready to use  HTML "mail" and "web" versions*
+2. from each *HAML template* you get one *HTML "mail" template* and one *HTML "web" template* 
+3. from *HTML "mail" template* and *HTML "web" template* you get *ready-to-use HTML "mail" and "web" versions*
 
 **In details**
 
@@ -61,15 +61,15 @@ ruby build.rb
 This command will create one *HTML "mail" template* and one *HTML "web" template* of your HAML page in 
 the `easy_html_emails/src/pages/web` and in the `easy_html_emails/src/pages/mail` folders.
 
-To convert your *HTML templates* to ready to use pages run
+To convert your *HTML templates* to ready-to-use pages run
 
 ```bash
 npm run build
 ```
  
-This command kick off the build *ready to use  HTML "mail" and "web" versions* process. And also it will open 
+This command kicks off the build process for *ready-to-use HTML "mail" and "web" versions*. And also it will open 
 new tab in your browser with your project files.
-Ready to use pages will appear in the `easy_html_emails/dist/` folder.
+Ready-to-use pages will appear in the `easy_html_emails/dist/` folder.
 
 ### Difference between `npm run build` and `npm start`
 
@@ -81,7 +81,7 @@ However, this is not true for your HAML files. To pass your changes from your HA
 ruby build.rb
 ``` 
 
-`npm start` works faster. But it doesn't provide all needed changes to make ready to use "mail" version pages!
+`npm start` works faster. But it doesn't provide all needed changes to make ready-to-use "mail" version pages!
 It is good to use in development process, but if you need final version of your "mail" pages then stop your `npm start` using `Ctrl + C`
 and run
 
@@ -91,5 +91,5 @@ npm run build
 
 to inline your CSS into your HTML along with the rest of the build process.
 
-More information you could find  here [Foundation for Emails framework](http://foundation.zurb.com/emails).
+You can find more information here [Foundation for Emails framework](http://foundation.zurb.com/emails).
 
