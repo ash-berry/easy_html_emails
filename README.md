@@ -1,23 +1,31 @@
-# Foundation for Emails Template
+Easy HTML emails
+----------------
 
-[![devDependency Status](https://david-dm.org/zurb/foundation-emails-template/dev-status.svg)](https://david-dm.org/zurb/foundation-emails-template#info=devDependencies)
+This project uses [Foundation for Emails framework](http://foundation.zurb.com/emails).
+And it allows you to create templates using HAML and Markdown and get as a result:
+- "mail" version page (HTML version ready to emailing)
+- "web" version page
 
-**Please open all issues with this template on the main [Foundation for Emails](http://github.com/zurb/foundation-emails/issues) repo.**
+Here is an example how HTML version (ready to emailing) should look like:
 
-This is the official starter project for [Foundation for Emails](http://foundation.zurb.com/emails), a framework for creating responsive HTML devices that work in any email client. It has a Gulp-powered build system with these features:
+![ready_to_emailing.png](./src/assets/img/ready_to_emailing.png "ready_to_emailing.png")
 
-- Handlebars HTML templates with [Panini](http://github.com/zurb/panini)
-- Simplified HTML email syntax with [Inky](http://github.com/zurb/inky)
-- Sass compilation
-- Image compression
-- Built-in BrowserSync server
-- Full email inlining process
+Using "Easy HTML emails" you can just write something like that:
 
-## Installation
+![your code](./src/assets/img/your_code.png "your code")
 
-To use this template, your computer needs [Node.js](https://nodejs.org/en/) 0.12 or greater. The template can be installed with the Foundation CLI, or downloaded and set up manually.
+Here is an example how your email would like for a recipient:
 
-### Using the CLI
+![in_mail_client](./src/assets/img/in_mail_client.jpg "in_mail_client")
+
+
+Prerequisites
+-------------
+
+To get started with this project you need Node.js 0.12 or greater on your machine.
+
+Getting Started
+---------------
 
 Install the Foundation CLI with this command:
 
@@ -25,106 +33,63 @@ Install the Foundation CLI with this command:
 npm install foundation-cli --global
 ```
 
-Use this command to set up a blank Foundation for Emails project:
+Then open the folder in your command line, and install needed dependencies:
 
 ```bash
-foundation new --framework emails
-```
-
-The CLI will prompt you to give your project a name. The template will be downloaded into a folder with this name.
-
-### Manual Setup
-
-To manually set up the template, first download it with Git:
-
-```bash
-git clone https://github.com/zurb/foundation-emails-template projectname
-```
-
-Then open the folder in your command line, and install the needed dependencies:
-
-```bash
-cd projectname
+cd easy_html_emails
 npm install
 ```
 
-## Build Commands
+Usage
+-----
 
-Run `npm start` to kick off the build process. A new browser tab will open with a server pointing to your project files.
+Simple **sequence** looks like that
+1. you create *HAML template*
+2. from each *HAML template* we get one *HTML "mail" template* and one *HTML "web" template* 
+3. from *HTML "mail" template* and *HTML "web" template* we get *ready to use  HTML "mail" and "web" versions*
 
-Run `npm run build` to inline your CSS into your HTML along with the rest of the build process.
+**In details**
 
-Run `npm run litmus` to build as above, then submit to litmus for testing. *AWS S3 Account details required (config.json)*
+Create new HAML template in the folder `easy_html_emails/src/pages`
 
-Run `npm run mail` to build as above, then send to specified email address for testing. *SMTP server details required (config.json)*
+Then run
 
-Run `npm run zip` to build as above, then zip HTML and images for easy deployment to email marketing services. 
+```bash
+ruby build.rb
+``` 
+ 
+This command will create one *HTML "mail" template* and one *HTML "web" template* of your HAML page in 
+the `easy_html_emails/src/pages/web` and in the `easy_html_emails/src/pages/mail` folders.
 
-### Speeding Up Your Build
+To convert your *HTML templates* to ready to use pages run
 
-If you create a lot of emails, your build can start to slow down, as each build rebuilds all of the emails in the
-repository. A simple way to keep it fast is to archive emails you no longer need by moving the pages into `src/pages/archive`.
-You can also move images that are no longer needed into `src/assets/img/archive`. The build will ignore pages and images that
-are inside the archive folder.
+```bash
+npm run build
+```
+ 
+This command kick off the build *ready to use  HTML "mail" and "web" versions* process. And also it will open 
+new tab in your browser with your project files.
+Ready to use pages will appear in the `easy_html_emails/dist/` folder.
 
-## Litmus Tests (config.json)
+### Difference between `npm run build` and `npm start`
 
-Testing in Litmus requires the images to be hosted publicly. The provided gulp task handles this by automating hosting to an AWS S3 account. Provide your Litmus and AWS S3 account details in the `example.config.json` and then rename to `config.json`. Litmus config, and `aws.url` are required, however if you follow the [aws-sdk suggestions](http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/node-configuring.html) you don't need to supply the AWS credentials into this JSON.
+Both commands launch your browser. Any changes made in any HTML files in the `easy_html_emails/src/pages` will be reflected in the `easy_html_emails/dist/` automatically, while any of these commands is running.
 
-```json
-{
-  "aws": {
-    "region": "us-east-1",
-    "accessKeyId": "YOUR_ACCOUNT_KEY",
-    "secretAccessKey": "YOUR_ACCOUNT_SECRET",
-    "params": {
-        "Bucket": "elasticbeanstalk-us-east-1-THIS_IS_JUST_AN_EXAMPLE"
-    },
-    "url": "https://s3.amazonaws.com/elasticbeanstalk-us-east-1-THIS_IS_JUST_AN_EXAMPLE"
-  },
-  "litmus": {
-    "username": "YOUR_LITMUS@EMAIL.com",
-    "password": "YOUR_ACCOUNT_PASSWORD",
-    "url": "https://YOUR_ACCOUNT.litmus.com",
-    "applications": ["ol2003","ol2007","ol2010","ol2011","ol2013","chromegmailnew","chromeyahoo","appmail9","iphone5s","ipad","android4","androidgmailapp"]
-  }
-}
+However, this is not true for your HAML files. To pass your changes from your HAML versions to HTML versions (number 2 of the **sequence**) every time run
+
+```bash
+ruby build.rb
+``` 
+
+`npm start` works faster. But it doesn't provide all needed changes to make ready to use "mail" version pages!
+It is good to use in development process, but if you need final version of your "mail" pages then stop your `npm start` using `Ctrl + C`
+and run
+
+```bash
+npm run build
 ```
 
-## Manual email tests (config.json)
+to inline your CSS into your HTML along with the rest of the build process.
 
-Similar to the Litmus tests, you can have the emails sent to a specified email address. Just like with the Litmus tests, you will need to provide AWS S3 account details in `config.json`. You will also need to specify to details of an SMTP server. The email address to send to emails to can either by configured in the `package.json` file or added as a parameter like so: `npm run mail -- --to="example.com"`
-
-```json
-{
-  "aws": {
-    "region": "us-east-1",
-    "accessKeyId": "YOUR_ACCOUNT_KEY",
-    "secretAccessKey": "YOUR_ACCOUNT_SECRET",
-    "params": {
-        "Bucket": "elasticbeanstalk-us-east-1-THIS_IS_JUST_AN_EXAMPLE"
-    },
-    "url": "https://s3.amazonaws.com/elasticbeanstalk-us-east-1-THIS_IS_JUST_AN_EXAMPLE"
-  },
-  "mail": {
-    "to": [
-      "example@domain.com"
-    ],
-    "from": "Company name <info@company.com",
-    "smtp": {
-      "auth": {
-        "user": "example@domain.com",
-        "pass": "12345678"
-      },
-      "host": "smtp.domain.com",
-      "secureConnection": true,
-      "port": 465
-    }
-  }
-}
-```
-
-For a full list of Litmus' supported test clients(applications) see their [client list](https://litmus.com/emails/clients.xml).
-
-**Caution:** AWS Service Fees will result, however, are usually very low do to minimal traffic. Use at your own discretion.
+More information you could find  here [Foundation for Emails framework](http://foundation.zurb.com/emails).
 
