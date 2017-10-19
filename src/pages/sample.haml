@@ -1,0 +1,58 @@
+:ruby
+  require_relative './src/helpers/rendering.rb'
+  require_relative './src/helpers/shortcut_maker.rb'
+
+\---
+layout: default
+subject: Subject of your email
+description: Your email description
+\---
+
+= start_temp
+= header_mail "Email sample"
+
+%row
+  %columns
+    = img("https://source.unsplash.com/o0RZkkL072U/548x308", "the mountains are calling")
+
+    :markdown
+      #####Here is your title
+
+      Here is some text.
+
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime dignissimos voluptas
+      minus, cupiditate voluptatem, voluptatum iste molestiae consectetur temporibus quae dolore nam possimus
+      reprehenderit blanditiis laborum iusto sit. Perspiciatis, dolor.
+
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime dignissimos voluptas
+      minus, cupiditate voluptatem, voluptatum iste molestiae consectetur temporibus quae
+      dolore nam possimus reprehenderit blanditiis laborum iusto sit. Perspiciatis, dolor.
+
+      Important message:
+
+    %callout.frame
+      Just do it!
+
+    :markdown
+      ######Your subtitle
+
+      Some plain text here
+      - *cursive list item*
+      - another list item
+      - one more list item
+
+      Here is a quote:
+
+    %callout.quote
+      "When you reach the end of your rope, tie a knot in it and hang on."
+      %br/
+      Franklin D. Roosevelt
+
+    %span
+      = img("https://source.unsplash.com/l6WMgMOvbNE/548x308", "climbing")
+      %small
+        Image description here
+      = space 15
+
+    = footer_mail("You have received this message because you are ...")
+= finish_temp
